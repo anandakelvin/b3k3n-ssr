@@ -1,27 +1,49 @@
-# Next.js + Tailwind CSS Example
+# Overview
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.0)](https://tailwindcss.com/blog/tailwindcss-v3) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+### Motivation
 
-## Deploy your own
+I decided to build the app using Next.js Server-side rendering technique with Dynamic routes as I think it would be better if crawlers could get the content on request time, so the books can be indexed and showed in Google results as well.
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
+### Approach
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
+The data fetching is implemented using RTK Query because handles the state reconciliation between the server and the client via Rehydration, and it handles caching as well. The bookmarks feature is implemented using Redux persist.
 
-## How to use
+# API Feedback
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
+### Overall response
 
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
+Consider returning response shaped like the following:
+
+```
+{
+    "meta": {
+			"status": 200,
+			"message": "OK"
+		},
+		"data": {
+			"result": [...],
+			"page": 1,
+			"size": 10,
+			"last_page": 13,
+			"total": 121,
+		}
+}
 ```
 
-```bash
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
-```
+- Consistent shape makes serialization easier and more readable
+- Accomodate sufficient data to implement pagination (page, size, total, last_page, or at least next_page_url)
+- Least page index should be 1 instead of 0
 
-```bash
-pnpm create next-app --example with-tailwindcss with-tailwindcss-app
-```
+### Feature
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+- The API should provide single endpoint to GET a book by bookId. It would make implementing server-side rendering more straightforward without the need to fetch a list of books
+- The API should provide sort and search query parameter.
+
+### Data
+
+- Image data should provide multiple sizes with each metadata such as aspect_ratio, etc.
+- Should return empty result as array instead of 404
+
+### URL
+
+Slash at the end of url should not cause the page query parameter to fallback to 10
