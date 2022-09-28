@@ -8,17 +8,19 @@ import {
 
 export const getInitialProps = wrapper.getInitialPageProps(
 	(store) => async (context) => {
-		const categoryId = context.query.categoryId ?? 1;
-		const pageIndex = context.query.pageIndex ?? 0;
-		store.dispatch(getCategories.initiate());
-		store.dispatch(
-			getBooksByCategoryIdAndPageIndex.initiate({
-				categoryId,
-				pageIndex,
-				pageSize: 10,
-			})
-		);
-		await Promise.all(getRunningOperationPromises());
+		if (context.req && !context.req.url.startsWith("/_next/data")) {
+			const categoryId = context.query.categoryId ?? 1;
+			const pageIndex = context.query.pageIndex ?? 0;
+			store.dispatch(getCategories.initiate());
+			store.dispatch(
+				getBooksByCategoryIdAndPageIndex.initiate({
+					categoryId,
+					pageIndex,
+					pageSize: 10,
+				})
+			);
+			await Promise.all(getRunningOperationPromises());
+		}
 		return {
 			props: {},
 		};

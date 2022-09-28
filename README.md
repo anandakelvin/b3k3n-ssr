@@ -2,11 +2,12 @@
 
 ### Motivation
 
-I decided to build the app using Next.js Server-side rendering technique with Dynamic routes as I think it would be better if crawlers could get the content on request time, so the books can be indexed and showed in Google results as well.
+I decided to build the app using Next.js Server-side rendering technique with Dynamic routes as I think it would be better if crawlers could get the content on request time, so the books can be indexed and showed in Google results as well. Enjoy the seamless navigation feeling of Client-side rendering with SSR on every initial page request.
 
 ### Approach
 
-The data fetching is implemented using RTK Query because handles the state reconciliation between the server and the client via Rehydration, and it handles caching as well. The bookmarks feature is implemented using Redux persist.
+The fetching queries is implemented using RTK Query because it handles the state reconciliation between the server and the client via Rehydration, and it handles caching as well. The bookmarks feature is implemented using Redux persist.
+The hybrid CSR/SSR data fetching technique is implemented inside every Page.getInitialProps as getInitialProps in invoked both in client when navigating and server during initial page load.
 
 # API Feedback
 

@@ -20,12 +20,15 @@ export default function CategoryDetailLayout() {
 	const categoryId = router.query.categoryId ?? 1;
 	const pageIndex = router.query.pageIndex ?? 0;
 	const { data: categories, error: errorCategories } = useGetCategoriesQuery();
-	const { data: books, error: errorBooks } =
-		useGetBooksByCategoryIdAndPageIndexQuery({
-			categoryId,
-			pageIndex,
-			pageSize: 10,
-		});
+	const {
+		data: books,
+		error: errorBooks,
+		isFetching: isFetchingBooks,
+	} = useGetBooksByCategoryIdAndPageIndexQuery({
+		categoryId,
+		pageIndex,
+		pageSize: 10,
+	});
 
 	useEffect(() => {
 		if (errorBooks) {
@@ -35,16 +38,18 @@ export default function CategoryDetailLayout() {
 				await (async () => {
 					return new Promise((resolve) => setTimeout(() => resolve(), 1000));
 				})();
-				router.push("/", undefined, { shallow: true });
+				router.push(`/${categoryId}/0`);
 			})();
 		}
 	}, [errorCategories, errorBooks]);
 
-	const filteredBooks = books?.filter(
-		(e) =>
-			search.length === 0 ||
-			e.title.toLowerCase().includes(search.toLowerCase())
-	);
+	const filteredBooks = isFetchingBooks
+		? null
+		: books?.filter(
+				(e) =>
+					search.length === 0 ||
+					e.title.toLowerCase().includes(search.toLowerCase())
+		  );
 
 	const selectedCategory = categories?.find((e) => e.id == categoryId);
 	return (

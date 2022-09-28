@@ -9,7 +9,7 @@ export default function CategoryItem({ category }) {
 
 	if (category) {
 		return (
-			<Link href={`/${category.id}`}>
+			<Link href={`/${category.id}`} scroll={false}>
 				<button
 					key={category.id}
 					className={CommonUtils.classNames(

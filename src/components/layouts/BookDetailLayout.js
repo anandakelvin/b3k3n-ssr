@@ -18,7 +18,7 @@ export default function BookDetailLayout() {
 	const dispatch = useDispatch();
 	const router = useRouter();
 	const { categoryId, pageIndex, bookId } = router.query;
-	const { data, error, isLoading } = useGetBooksByCategoryIdAndPageIndexQuery({
+	const { data, error, isFetching } = useGetBooksByCategoryIdAndPageIndexQuery({
 		categoryId,
 		pageIndex,
 		pageSize: 10,
@@ -28,8 +28,8 @@ export default function BookDetailLayout() {
 		error && toast.error("Something went wrong");
 	}, [error]);
 
-	const book = data?.find((e) => e.id == bookId);
-	if (!isLoading && !book) {
+	const book = isFetching ? null : data?.find((e) => e.id == bookId);
+	if (!isFetching && !book) {
 		router.replace("/");
 	}
 	return (
