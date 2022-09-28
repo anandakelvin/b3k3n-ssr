@@ -28,8 +28,16 @@ export default function CategoryDetailLayout() {
 		});
 
 	useEffect(() => {
-		errorCategories && toast.error("Something went wrong");
-		errorBooks && toast.error("Something went wrong");
+		if (errorBooks) {
+			toast.error("Contents unavailable, redirecting...");
+
+			(async () => {
+				await (async () => {
+					return new Promise((resolve) => setTimeout(() => resolve(), 1000));
+				})();
+				router.push("/", undefined, { shallow: true });
+			})();
+		}
 	}, [errorCategories, errorBooks]);
 
 	const filteredBooks = books?.filter(
