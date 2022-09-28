@@ -14,20 +14,17 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { Provider } from "react-redux";
 import { wrapper } from "../src/app/store";
 import { Toaster } from "react-hot-toast";
-import { PersistGate } from "redux-persist/integration/react";
 
 import { persistStore } from "redux-persist";
 
 export default function MyApp({ Component, ...rest }) {
 	const { store, props } = wrapper.useWrappedStore(rest);
-	const persistor = persistStore(store);
+	persistStore(store);
 
 	return (
 		<Provider store={store}>
-			<PersistGate loading={null} persistor={persistor}>
-				<Toaster />
-				<Component {...props.pageProps} />
-			</PersistGate>
+			<Toaster />
+			<Component {...props.pageProps} />
 		</Provider>
 	);
 }
