@@ -18,7 +18,7 @@ export default function BookDetailLayout() {
 	const dispatch = useDispatch();
 	const router = useRouter();
 	const { categoryId, pageIndex, bookId } = router.query;
-	const { data, error } = useGetBooksByCategoryIdAndPageIndexQuery({
+	const { data, error, isLoading } = useGetBooksByCategoryIdAndPageIndexQuery({
 		categoryId,
 		pageIndex,
 		pageSize: 10,
@@ -29,6 +29,9 @@ export default function BookDetailLayout() {
 	}, [error]);
 
 	const book = data?.find((e) => e.id == bookId);
+	if (!isLoading && !book) {
+		router.replace("/");
+	}
 	return (
 		<Screen>
 			<div className="sm:flex gap-5 lg:gap-10">
@@ -83,14 +86,15 @@ export default function BookDetailLayout() {
 								</div>
 							</div>
 							<button
+								disabled={!book}
 								onClick={() =>
 									dispatch(
 										addOrRemove({ categoryPageIndex: pageIndex, ...book })
 									)
 								}
-								className="border-[1.5px] ml-auto border-primary rounded-md p-1 px-2 text-xs"
+								className="disabled:opacity-50 border-[1.5px] ml-auto border-primary rounded-md p-1 px-2 text-xs"
 							>
-								{bookmarks.find((e) => e.id === book.id)
+								{bookmarks.find((e) => e.id === book?.id)
 									? "Remove from"
 									: "Add to"}{" "}
 								Bookmarks
