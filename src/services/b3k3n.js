@@ -3,7 +3,10 @@ import { HYDRATE } from "next-redux-wrapper";
 
 export const b3k3nApi = createApi({
 	baseQuery: fetchBaseQuery({
-		baseUrl: "http://localhost:3000/api",
+		baseUrl:
+			process.env.NODE_ENV === "development"
+				? "http://localhost:3000/api"
+				: "https://b3k3n-ssr.anandakelv.in/api",
 	}),
 	extractRehydrationInfo(action, { reducerPath }) {
 		if (action.type === HYDRATE) {
