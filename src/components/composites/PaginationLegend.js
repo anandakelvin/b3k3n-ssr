@@ -32,7 +32,7 @@ export default function PaginationLegend() {
 							</a>
 						</Link>
 						{pages.map((e) => (
-							<Link href={`/${categoryId}/${e}`} scroll={false}>
+							<Link key={e} href={`/${categoryId}/${e}`} scroll={false}>
 								<a>
 									<Node key={e} isActive={pageIndex === e}>
 										{e}

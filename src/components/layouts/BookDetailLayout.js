@@ -25,7 +25,7 @@ export default function BookDetailLayout() {
 	});
 
 	useEffect(() => {
-		error && toast.error("Error " + error.originalStatus);
+		error && toast.error("Something went wrong");
 	}, [error]);
 
 	const book = data?.find((e) => e.id == bookId);

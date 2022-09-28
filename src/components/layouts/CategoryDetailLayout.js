@@ -28,8 +28,8 @@ export default function CategoryDetailLayout() {
 		});
 
 	useEffect(() => {
-		errorCategories && toast.error("Error " + errorCategories.originalStatus);
-		errorBooks && toast.error("Error " + errorBooks.originalStatus);
+		errorCategories && toast.error("Something went wrong");
+		errorBooks && toast.error("Something went wrong");
 	}, [errorCategories, errorBooks]);
 
 	const filteredBooks = books?.filter(
