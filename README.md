@@ -6,7 +6,7 @@ I decided to build the app using Next.js Server-side rendering technique with Dy
 
 ### Approach
 
-The fetching queries is implemented using RTK Query because it handles the state reconciliation between the server and the client via Rehydration, and it handles caching as well. The bookmarks feature is implemented using Redux persist.
+The fetching queries is implemented using RTK Query because it supports handling state reconciliation between the server and the client via Rehydration, and it handles caching as well. The bookmarks feature is implemented using Redux persist, utilizing localStorage.
 The hybrid CSR/SSR data fetching technique is implemented inside every Page.getInitialProps as getInitialProps in invoked both in client when navigating and server during initial page load.
 
 # Crawlers Perspective
@@ -25,7 +25,7 @@ Consider returning response shaped like the following:
 
 ```
 {
-    "meta": {
+		"meta": {
 			"status": 200,
 			"message": "OK"
 		},
