@@ -24,14 +24,24 @@ export default function BookDetailLayout() {
 		pageSize: 10,
 	});
 
+	const book = isFetching ? null : data?.find((e) => e.id == bookId);
+
 	useEffect(() => {
 		error && toast.error("Something went wrong");
 	}, [error]);
 
-	const book = isFetching ? null : data?.find((e) => e.id == bookId);
-	if (!isFetching && !book) {
-		router.replace("/");
-	}
+	useEffect(() => {
+		if (!isFetching && !book) {
+			toast.error("Content is unavailable, redirecting...");
+			(async () => {
+				await (async () => {
+					return new Promise((resolve) => setTimeout(() => resolve(), 1000));
+				})();
+				router.replace("/");
+			})();
+		}
+	}, [isFetching]);
+
 	return (
 		<Screen>
 			<div className="sm:flex gap-5 lg:gap-10">

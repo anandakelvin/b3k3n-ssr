@@ -32,13 +32,13 @@ export default function CategoryDetailLayout() {
 
 	useEffect(() => {
 		if (errorBooks) {
-			toast.error("Contents unavailable, redirecting...");
+			toast.error("Contents are unavailable, redirecting...");
 
 			(async () => {
 				await (async () => {
 					return new Promise((resolve) => setTimeout(() => resolve(), 1000));
 				})();
-				router.push(`/${categoryId}/0`);
+				router.replace(`/${categoryId}/0`);
 			})();
 		}
 	}, [errorCategories, errorBooks]);
