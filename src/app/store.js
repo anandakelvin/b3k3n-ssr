@@ -1,12 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { b3k3nApi } from "../services/b3k3n.js";
 import { createWrapper } from "next-redux-wrapper";
 import { persistReducer } from "redux-persist";
+import { b3k3nApi } from "@/src/services/b3k3n.js";
 import storage from "redux-persist/lib/storage";
 import bookmarksReducer from "@/src/features/bookmarks/bookmarksSlice.js";
 
 const bookmarksPersistConfig = {
-	key: "root",
+	key: "b3k3n-bookmarks",
 	storage,
 };
 
