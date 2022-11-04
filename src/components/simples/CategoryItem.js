@@ -13,7 +13,7 @@ export default function CategoryItem({ category }) {
 				<button
 					key={category.id}
 					className={CommonUtils.classNames(
-						"p-1 px-2 sm:p-2 sm:px-3 border-[1.5px] rounded-lg text-xs sm:text-base",
+						"p-1 px-2 sm:p-2 sm:px-3 border-[1.5px] text-left rounded-lg text-xs sm:text-base",
 						category.id == categoryId
 							? "bg-primary text-white border-primary"
 							: "border-gray-400"

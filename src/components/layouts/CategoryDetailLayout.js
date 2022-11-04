@@ -54,7 +54,7 @@ export default function CategoryDetailLayout() {
 	const selectedCategory = categories?.find((e) => e.id == categoryId);
 	return (
 		<Screen>
-			<div className="flex flex-col sm:flex-row sm:gap-10">
+			<div className="flex flex-col sm:h-full sm:flex-grow sm:flex-row sm:gap-10">
 				<div className="sm:w-1/3">
 					<h2 className="mb-5">Explore Categories</h2>
 					<div className="mb-7 flex flex-wrap gap-3">
@@ -62,7 +62,7 @@ export default function CategoryDetailLayout() {
 							[...Array(7)].map((e, n) => <CategoryItem key={(e, n)} />)}
 					</div>
 				</div>
-				<div className="sm:w-2/3">
+				<div className="sm:w-2/3 sm:flex sm:flex-col sm:flex-grow sm:h-full">
 					<h2 className="mb-5">
 						{selectedCategory?.name ?? <Skeleton width={"35%"} />}
 					</h2>
@@ -78,7 +78,7 @@ export default function CategoryDetailLayout() {
 							/>
 						</div>
 					</div>
-					<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5 my-5 mb-10">
+					<div className="sm:h-full sm:flex-grow overflow-scroll grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5 my-5 mb-10">
 						{filteredBooks?.map((e) => (
 							<Link key={e.id} href={`/${categoryId}/${pageIndex}/${e.id}`}>
 								<a>
