@@ -66,7 +66,7 @@ export default function CategoryDetailLayout() {
 					<h2 className="mb-5">
 						{selectedCategory?.name ?? <Skeleton width={"35%"} />}
 					</h2>
-					<div className="mb-7">
+					<div>
 						<div className="flex items-center gap-5 p-3 px-5 border-[1.5px] rounded-lg border-gray-400">
 							<BsSearch />
 							<input
@@ -78,7 +78,7 @@ export default function CategoryDetailLayout() {
 							/>
 						</div>
 					</div>
-					<div className="sm:h-full sm:flex-grow overflow-scroll grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5 my-5 mb-10">
+					<div className="pt-7 sm:h-full sm:flex-grow overflow-scroll grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5 my-5 pb-10">
 						{filteredBooks?.map((e) => (
 							<Link key={e.id} href={`/${categoryId}/${pageIndex}/${e.id}`}>
 								<a>
