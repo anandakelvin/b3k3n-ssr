@@ -1,6 +1,6 @@
 # Overview
 
-### Motivatio
+### Motivation
 
 I decided to build the app using Next.js Server-side rendering technique with Dynamic routes as I think it would be better if crawlers could get the content on request time, so the contents can be indexed by all crawlers as well. Enjoy the seamless navigation of client-side rendering with server-side rendering on every initial page request.
 
