@@ -6,7 +6,7 @@ export const b3k3nApi = createApi({
 		baseUrl:
 			process.env.NODE_ENV === "development"
 				? "http://localhost:3000/api"
-				: "https://b3k3n-ssr.anandakelvin.me/api",
+				: "https://b3k3n-ssr.vercel.app/api",
 	}),
 	extractRehydrationInfo(action, { reducerPath }) {
 		if (action.type === HYDRATE) {
